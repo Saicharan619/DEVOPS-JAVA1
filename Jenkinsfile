@@ -54,7 +54,7 @@ tools {
         stage("Google Cloud Login") {
             steps {
                 sh '''
-                gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS 
+                gcloud auth activate-service-account --key-file= $GOOGLE_APPLICATION_CREDENTIALS 
                 gcloud auth configure-docker asia-south2-docker.pkg.dev
                 '''
             }
