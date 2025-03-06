@@ -45,7 +45,7 @@ tools {
         sh '''
         docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} .
         docker tag ${IMAGE_NAME}:${BUILD_NUMBER} ${IMAGE_NAME}:${BUILD_NUMBER}
-        docker tag ${IMAGE_NAME}:${BUILD_NUMBER} ${IMAGE_NAME}:latest
+    #docker tag ${IMAGE_NAME}:${BUILD_NUMBER} ${IMAGE_NAME}:latest
         docker images
 
         '''
@@ -57,7 +57,7 @@ tools {
             sh '''
             echo $PASSWORD | docker login -u $USERNAME --password-stdin
             docker push ${IMAGE_NAME}:${BUILD_NUMBER} || echo "Push Failed, Retrying..."
-            docker push ${IMAGE_NAME}:latest
+           # docker push ${IMAGE_NAME}:latest
 
             docker tag ${IMAGE_NAME}:${BUILD_NUMBER} ${ARTIFACT_REPO}/${IMAGE_NAME}:${BUILD_NUMBER}
             docker push ${ARTIFACT_REPO}/${IMAGE_NAME}:${BUILD_NUMBER}
