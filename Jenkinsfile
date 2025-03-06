@@ -51,21 +51,20 @@ tools {
         '''
     }
 }
-        stage('Docker Login & Push') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    sh '''
-                    echo $PASSWORD | docker login -u $USERNAME --password-stdin
-                    docker push ${IMAGE_NAME}:${BUILD_NUMBER} || echo "Push Failed, Retrying..."
-                    docker push ${IMAGE_NAME}:latest
+       stage('Docker Login & Push') {
+    steps {
+        withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+            sh '''
+            echo $PASSWORD | docker login -u $USERNAME --password-stdin
+            docker push ${IMAGE_NAME}:${BUILD_NUMBER} || echo "Push Failed, Retrying..."
+            docker push ${IMAGE_NAME}:latest
 
-
-                    docker tag ${IMAGE_NAME} ${ARTIFACT_REPO}/${IMAGE_NAME}:${BUILD_NUMBER}
-                    docker push ${ARTIFACT_REPO}/${IMAGE_NAME}:${BUILD_NUMBER}
-                    '''
-                }
-            }
+            docker tag ${IMAGE_NAME}:${BUILD_NUMBER} ${ARTIFACT_REPO}/${IMAGE_NAME}:${BUILD_NUMBER}
+            docker push ${ARTIFACT_REPO}/${IMAGE_NAME}:${BUILD_NUMBER}
+            '''
         }
+    }
+}
         
 
 
