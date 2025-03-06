@@ -103,7 +103,7 @@ pipeline {
         stage('Ansible Deployment') {
             steps {
                 sh '''
-                ansible-playbook dockerinstall.yml -e build_number=$BUILD_NUMBER
+                ansible-playbook ansible(doc,pull,cont).yml -e build_number=$BUILD_NUMBER
                 '''
             }
         }
