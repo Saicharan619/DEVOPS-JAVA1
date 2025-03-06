@@ -51,6 +51,14 @@ tools {
         '''
     }
 }
+        stage("Google Cloud Login") {
+            steps {
+                sh '''
+                gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS 
+                gcloud auth configure-docker asia-south2-docker.pkg.dev/saicharan-452306/devopsjava1
+                '''
+            }
+        }
        stage('Docker Login & Push') {
     steps {
         withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
