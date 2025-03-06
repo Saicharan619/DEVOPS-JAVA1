@@ -105,7 +105,7 @@ tools {
         stage('Ansible Deployment') {
             steps {
                 sh '''
-                ansible-playbook ansible.yml -e build_number=$BUILD_NUMBER   //ansible (docker install,docker pull,docker run)
+                ansible-playbook ansible.yml -e build_number=$BUILD_NUMBER   //ansible(docker install,docker pull,docker run)
                 '''
             }
         }
