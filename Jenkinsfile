@@ -55,7 +55,7 @@ tools {
             steps {
                 sh '''
                 gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS 
-                gcloud auth configure-docker asia-south2-docker.pkg.dev/saicharan-452306/devopsjava1
+                gcloud auth configure-docker asia-south2-docker.pkg.dev
                 '''
             }
         }
