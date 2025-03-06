@@ -9,6 +9,7 @@ tools {
         IMAGE_NAME = "saicharan12121/javasample1"
         BUILD_NUMBER = "${env.BUILD_NUMBER}"
         GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp.json')
+        ARTIFACT_REPO = "asia-south2-docker.pkg.dev/saicharan-452306/devopsjava1"
    
     }
 
@@ -56,11 +57,16 @@ tools {
                     sh '''
                     echo $PASSWORD | docker login -u $USERNAME --password-stdin
                     docker push ${IMAGE_NAME}:${BUILD_NUMBER} || echo "Push Failed, Retrying..."
-                    docker push ${IMAGE_NAME}:latest
+                    // docker push ${IMAGE_NAME}:latest
+
+
+                    docker tag ${IMAGE_NAME} ${ARTIFACT_REPO}/${IMAGE_NAME}:${BUILD_NUMBER}
+                    docker push ${ARTIFACT_REPO}/${IMAGE_NAME}:${BUILD_NUMBER}
                     '''
                 }
             }
         }
+        
 
 
 
