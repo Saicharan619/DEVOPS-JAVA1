@@ -1,7 +1,7 @@
 pipeline {
     agent any
 tools {
-        terraform 'terraform'  // This will install Terraform automatically
+        terraform 'terra'  // This will install Terraform automatically
     }
     environment {
         SONAR_URL = 'http://34.27.111.131:9000'
